@@ -16,7 +16,7 @@ while True:
     text = r.text
     jpeg_decoded = base64.b64decode(r.text)
     # convert image to numpy array
-    jpeg_decoded = np.fromstring(jpeg_decoded, dtype=np.uint8)
+    jpeg_decoded = np.frombuffer(jpeg_decoded, dtype=np.uint8)
     # convert numpy array to image
     jpeg_decoded = cv2.imdecode(jpeg_decoded, cv2.IMREAD_COLOR)
     # display image
