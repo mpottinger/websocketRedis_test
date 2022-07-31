@@ -7,7 +7,7 @@ import cv2
 import numpy as np
 import base64
 
-url = "http://localhost:8000/dw1"
+url = "http://75.155.9.70:8000/dw1"
 
 # read image from webcam
 cap = cv2.VideoCapture(0)
