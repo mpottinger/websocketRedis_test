@@ -7,10 +7,12 @@ import cv2
 import numpy as np
 import base64
 
-url = "http://localhost:8000/dw1"
+url = "http://75.152.195.28:8000/dw1"
 
-# read image from webcam
+# read image from webcam, set resolution to 640x480
 cap = cv2.VideoCapture(0)
+cap.set(3, 640)
+cap.set(4, 480)
 
 while True:
     ret, frame = cap.read()
