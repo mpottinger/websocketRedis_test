@@ -7,7 +7,7 @@ import cv2
 import numpy as np
 import base64
 
-url = "http://localhost:8000/dw1"
+url = "http://75.152.195.28:8000/dw1"
 
 while True:
     # send GET request to the server
