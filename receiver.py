@@ -7,24 +7,25 @@ import cv2
 import numpy as np
 import base64
 
-#url = "http://75.152.195.28:8000/dw1"
-url = "http://localhost:8000/dw1"
+url = "http://137.186.157.198:8000/dw1"
+#url = "http://localhost:8000/dw1"
 
 while True:
-    # send GET request to the server
+    # send GET request to the server, receiving binary data
     r = requests.get(url)
-    # decode Base64 text to image
-    #jpeg_decoded = base64.b64decode(r.text)
-    jpeg_decoded = r.content
-    # add html image tag to the decoded text
-    # convert image to numpy array
-    jpeg_decoded = np.frombuffer(jpeg_decoded, dtype=np.uint8)
-    # convert numpy array to image
-    jpeg_decoded = cv2.imdecode(jpeg_decoded, cv2.IMREAD_COLOR)
+    print("content type:", r.headers['Content-Type'])
+    # convert binary data to numpy array
+    img = np.frombuffer(r.content, dtype=np.uint8)
+    #print(r.content)
+    #print("Received content of size:", len(r.content))
+    #print("np frombuffer shape: ", img.shape)
+    # decode numpy array to opencv image
+    img = cv2.imdecode(img, cv2.IMREAD_COLOR)
     # display image
-    cv2.imshow('frame', jpeg_decoded)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    cv2.imshow('image', img)
+    # wait for key press
+    k = cv2.waitKey(1) & 0xFF
+    if k == 27:
         break
-
 
 

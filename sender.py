@@ -7,8 +7,9 @@ import cv2
 import numpy as np
 import base64
 
-url = "http://75.152.195.28:8000/dw1"
-
+url = "http://137.186.157.198:8000/dw1"
+content_type = 'image/jpeg'
+#content_type = 'application/octet-stream'
 # read image from webcam, set resolution to 640x480
 cap = cv2.VideoCapture(0)
 cap.set(3, 640)
@@ -18,7 +19,9 @@ while True:
     ret, frame = cap.read()
     # convert image to Base64 text and post to server
     ret, jpeg = cv2.imencode('.jpg', frame, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
-    jpeg_text = base64.b64encode(jpeg)
-    r = requests.post(url, data=jpeg_text)
+    #jpeg_text = base64.b64encode(jpeg)
+
+    # send as binary data
+    r = requests.post(url, data=jpeg.tobytes(), headers={'Content-Type': content_type})
 
 
