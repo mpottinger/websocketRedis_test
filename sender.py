@@ -8,6 +8,7 @@ import numpy as np
 import base64
 
 url = "http://34.106.72.196:80/dw1"
+#url = "http://localhost:8000/dw1"
 content_type = 'image/jpeg'
 #content_type = 'application/octet-stream'
 #content_type = 'video/x-motion-jpeg'
