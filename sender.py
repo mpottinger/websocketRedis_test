@@ -27,7 +27,8 @@ while True:
     # convert jpeg image to raw byte array
     img = img.tobytes()
     r = s.post(url, headers=headers, data=img)
+
     # check if server response was successful
-    print("server returned:", r.status_code)
+    #print("server returned:", r.status_code)
 
 

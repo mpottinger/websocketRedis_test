@@ -19,7 +19,7 @@ while True:
     r = s.get(url, headers=headers)
     # check if server response was successful
     if r.status_code == 200:
-        print("content type:", r.headers['Content-Type'])
+        #print("content type:", r.headers['Content-Type'])
         # convert binary data to numpy array
         img = np.frombuffer(r.content, dtype=np.uint8)
         # decode numpy array to opencv image
@@ -31,6 +31,7 @@ while True:
         if k == 27:
             break
     else:
-        print("server returned:", r.status_code)
+        pass
+        #print("server returned:", r.status_code)
 
 
