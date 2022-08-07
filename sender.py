@@ -10,11 +10,9 @@ import base64
 
 #url = "http://34.106.72.196:80/dw1"
 url = "http://localhost:8000/dw1"
-#cap = cv2.VideoCapture(0)
 
 content_type = 'image/jpeg'
 # header for POST request
-headers = {'Wait': 'true','Content-Type': content_type }
 # initialize video capture
 cap = cv2.VideoCapture(0)
 s = requests.Session()
@@ -26,9 +24,9 @@ while True:
     img = cv2.imencode('.jpg', frame)[1]
     # convert jpeg image to raw byte array
     img = img.tobytes()
-    r = s.post(url, headers=headers, data=img)
+    r = s.put(url, data=img, headers={'Content-Type': content_type})
 
     # check if server response was successful
-    #print("server returned:", r.status_code)
+    print("server returned:", r.status_code)
 
 
