@@ -27,6 +27,6 @@ while True:
     r = s.put(url, data=img, headers={'Content-Type': content_type})
 
     # check if server response was successful
-    print("server returned:", r.status_code)
+    print("server returned:", r.status_code, r.text)
 
 

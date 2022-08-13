@@ -1,5 +1,6 @@
 # send POST request with jpg from opencv webcam image to http server,
 # and then a GET request to the same server to get the image to display
+import time
 
 import requests
 import sys
@@ -10,6 +11,8 @@ import base64
 #url = "http://34.106.72.196:80/dw1"
 url = "http://localhost:8000/dw1"
 s = requests.Session()
+frame_count = 1
+start = time.time()
 while True:
     # send Get request to the server, this will pop an item from the queue of a given key
     # the video sender will only upload the data if the queue is empty for a given key, saving bandwidth
@@ -18,6 +21,12 @@ while True:
     # check if server response was successful
     print("server returned:", r.status_code)
     if r.status_code == 200:
+        # calculate FPS
+        fps = (time.time() - start) / frame_count
+        fps = 1 / fps
+        frame_count += 1
+        print("FPS: %.2f" % fps)
+
         # convert binary data to numpy array
         img = np.frombuffer(r.content, dtype=np.uint8)
         # decode numpy array to opencv image
