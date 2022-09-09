@@ -47,6 +47,7 @@ while True:
     req = ClientRequest("PUT", 10, "image", len(img))
     # convert ClientRequest object to json text
     req = json.dumps(req.__dict__)
+    print(req)
     req_bytes = bytes(req, 'utf-8')
     # concatenate json text and jpeg image
     msg = req_bytes + img

@@ -30,21 +30,25 @@ while True:
     req = json.dumps(req.__dict__)
     s.send(req + msg,websocket.ABNF.OPCODE_BINARY)
     msg = s.recv()
-    if(msg == "TIMEOUT"):
+    #print(len(msg))
+    #print(msg)
+    if(msg == b"TIMEOUT" or msg == b"timeout"):
         print("TIMEOUT")
-        continue
-    # convert message to numpy array (bytes)
-    img = np.frombuffer(msg, dtype=np.uint8)
-    # # convert numpy array to opencv image
-    img = cv2.imdecode(img, cv2.IMREAD_COLOR)
-    # # display image
-    cv2.imshow('image', img)
-    # # press q to quit
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-         break
-    # # print frame count and time per frame
-    frame_count += 1
-    start = time.time()
+    else:
+        # convert message to numpy array (bytes)
+        img = np.frombuffer(msg, dtype=np.uint8)
+        # # convert numpy array to opencv image
+        img = cv2.imdecode(img, cv2.IMREAD_COLOR)
+        # # display image
+        try:
+            cv2.imshow('image', img)
+        except:
+            print("error")
+        # # press q to quit
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+             break
+        # # print frame count and time per frame
+        frame_count += 1
 
 
 
